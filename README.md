@@ -10,6 +10,7 @@ An AI-powered campus micro-itinerary planner that generates optimized daily sche
 ## Features
 
 - **AI-Powered Itinerary Generation** - Uses Google's Gemini 2.0 Flash via OpenRouter to create smart, constraint-aware schedules
+- **User Authentication** - Secure login with email/password or Google OAuth via Supabase
 - **Real-time Weather Integration** - Fetches current weather data from Open-Meteo API
 - **Interactive Map View** - Visualize your itinerary on a Leaflet map with route connections
 - **Constraint-Based Planning** - Set budget, energy level, walking tolerance, travel mode, and accessibility needs
@@ -20,6 +21,7 @@ An AI-powered campus micro-itinerary planner that generates optimized daily sche
 
 - **Frontend**: React 19, TypeScript, TailwindCSS 4, Framer Motion
 - **Backend**: Express.js, Better-SQLite3
+- **Auth**: Supabase Auth (Email + Google OAuth)
 - **AI**: OpenRouter (Gemini 2.0 Flash)
 - **Maps**: Leaflet, React-Leaflet
 - **Build**: Vite 6
@@ -49,19 +51,31 @@ An AI-powered campus micro-itinerary planner that generates optimized daily sche
    cp .env.example .env
    ```
    
-   Edit `.env` and add your OpenRouter API key:
+   Edit `.env` and add your credentials:
    ```env
-   VITE_OPENROUTER_API_KEY="your-openrouter-api-key-here"
-   ```
+   # OpenRouter API Key (get from https://openrouter.ai/keys)
+   VITE_OPENROUTER_API_KEY="your-openrouter-api-key"
    
-   Get your API key from [OpenRouter](https://openrouter.ai/keys)
+   # Supabase Configuration (get from https://supabase.com/dashboard/project/_/settings/api)
+   VITE_SUPABASE_URL="your-supabase-project-url"
+   VITE_SUPABASE_ANON_KEY="your-supabase-anon-key"
+   ```
 
-4. **Start the development server**
+4. **Set up Supabase Authentication**
+   - Go to your [Supabase Dashboard](https://supabase.com/dashboard)
+   - Navigate to Authentication > Providers
+   - Enable Email provider (enabled by default)
+   - (Optional) Enable Google OAuth:
+     - Go to Authentication > Providers > Google
+     - Add your Google OAuth credentials
+     - Set the redirect URL to `your-supabase-url/auth/v1/callback`
+
+5. **Start the development server**
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
+6. **Open your browser**
    Navigate to `http://localhost:3000`
 
 ## Scripts

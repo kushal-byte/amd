@@ -32,15 +32,20 @@ import {
   CloudRain,
   Wind,
   Crosshair,
-  MessageSquare
+  MessageSquare,
+  LogOut,
+  User
 } from 'lucide-react';
 import { cn } from './types';
 import type { ConstraintSet, PlanResponse, SavedPlanHeader, ItineraryItem } from './types';
 import { generateItinerary } from './services/aiService';
 import Markdown from 'react-markdown';
 import FlowMap from './components/FlowMap';
+import AuthPage from './components/AuthPage';
+import { useAuth } from './contexts/AuthContext';
 
 export default function App() {
+  const { user, loading: authLoading, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<PlanResponse | null>(null);
   const [savedPlans, setSavedPlans] = useState<SavedPlanHeader[]>([]);
@@ -216,6 +221,20 @@ export default function App() {
     return Math.round(score);
   };
 
+  // Show loading spinner during auth check
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-bg flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-accent animate-spin" />
+      </div>
+    );
+  }
+
+  // Show auth page if not logged in
+  if (!user) {
+    return <AuthPage />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -253,6 +272,19 @@ export default function App() {
           </button>
           <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> SYSTEM_ACTIVE</span>
           <span>v1.0.4-BETA</span>
+          <div className="flex items-center gap-2 pl-2 border-l border-border">
+            <span className="flex items-center gap-1">
+              <User className="w-3 h-3" />
+              <span className="max-w-[100px] truncate">{user.email}</span>
+            </span>
+            <button
+              onClick={signOut}
+              className="flex items-center gap-1 px-2 py-1 hover:bg-red-500/20 hover:text-red-400 transition-colors border border-transparent hover:border-red-500/30"
+              title="Sign out"
+            >
+              <LogOut className="w-3 h-3" />
+            </button>
+          </div>
         </div>
       </header>
 
