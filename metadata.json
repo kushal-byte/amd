@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Between AI",
+  "description": "A constraint-based campus micro-planner that generates optimized itineraries between classes with explainable AI reasoning.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
