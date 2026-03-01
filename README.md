@@ -1,5 +1,6 @@
 # Between AI 🗺️
-
+## TRY IT OUT HERE!
+https://github.com/benkiraj/BetweenAI
 An AI-powered campus micro-itinerary planner that generates optimized daily schedules based on your constraints, weather conditions, and real-time data.
 
 ![Between AI](https://img.shields.io/badge/version-1.0.0-blue.svg)
