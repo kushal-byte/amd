@@ -36,7 +36,7 @@ export async function generateItinerary(constraints: ConstraintSet): Promise<Pla
     - "overallScore": A number from 0 to 1 representing efficiency.
     - "items": An array of itinerary items, each with:
       - "id": Unique string.
-      - "time": e.g., "09:00".
+      - "time": Time in 12-hour format with AM/PM in IST (e.g., "09:00 AM", "02:30 PM").
       - "activity": Name of activity.
       - "location": Name of building/spot.
       - "reasoning": Why this was chosen (Markdown supported).
@@ -46,6 +46,8 @@ export async function generateItinerary(constraints: ConstraintSet): Promise<Pla
       - "type": one of ['class', 'break', 'transit', 'meal'].
       - "coordinates": { "lat": number, "lng": number }.
       - "constraints": Array of { "label": string, "status": 'met'|'warning'|'failed', "detail": string }.
+    
+    IMPORTANT: All times must be in Indian Standard Time (IST) and use 12-hour format with AM/PM.
     
     CRITICAL: Return ONLY the JSON object. Do not include any other text.
   `;
